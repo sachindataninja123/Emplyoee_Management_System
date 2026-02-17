@@ -1,12 +1,15 @@
-import React from 'react'
-import "./App.css"
+import React from "react";
+import "./App.css";
+import Login from "./components/auth/Login";
+import EmployeeDashboard from "./components/dashboard/EmployeeDashboard";
 
 const App = () => {
   return (
     <div>
-      <h1 className='bg-red-300'>Hello</h1>
+      {/* <Login /> */}
+      <EmployeeDashboard />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
