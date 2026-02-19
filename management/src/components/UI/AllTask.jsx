@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const AllTask = () => {
+
+  const authData = useContext(AuthContext);
+  console.log(authData.employees)
+
   return (
     <div id="allTask" className="bg-[#1c1c1c] p-5 mt-5 rounded-md overflow-auto h-46 ">
       <div className="bg-red-400 py-2 px-4 flex justify-between rounded mb-2">

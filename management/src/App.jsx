@@ -8,16 +8,19 @@ import { AuthContext } from "./context/AuthProvider";
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [loggedInUserData, setLoggedInUserData] = useState();
+  const [loggedInUserData, setLoggedInUserData] = useState(null);
 
   const authData = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   if(authData){
-  //     const loggedInUser = localStorage.getItem("loggedInUser");
-  //     setUser(loggedInUser.role)
-  //   }
-  // }, [authData]);
+ useEffect(() => {
+  const loggedInUser = localStorage.getItem('loggedInUser')
+
+  if(loggedInUser) {
+    const userData = JSON.parse(loggedInUser)
+    setUser(userData.role)
+    setLoggedInUserData(userData.data)
+  }
+ },[])
 
  
 
@@ -34,7 +37,7 @@ const App = () => {
         setLoggedInUserData(employee);
         localStorage.setItem(
           "loggedInUser",
-          JSON.stringify({ role: "employee" }),
+          JSON.stringify({ role: "employee" , data : employee }),
         );
       }
     } else {
