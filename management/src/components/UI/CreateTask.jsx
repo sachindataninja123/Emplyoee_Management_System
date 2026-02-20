@@ -1,21 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 
 const CreateTask = () => {
+  const initialState = {
+    taskTitle: "",
+    assignto: "",
+    category: "",
+    description: "",
+    date: "",
+  };
+
+  const [createTaskData, setCreateTaskData] = useState(initialState);
+
+  const [task, setTask] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCreateTaskData({
+      ...createTaskData,
+      [name]: value,
+    });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    setTask({
+     ...createTaskData,
+      active: false,
+      newTask: true,
+      failed: true,
+      completed: false,
+    });
+    console.log(task);
+
+    setCreateTaskData(initialState);
+  };
+
   return (
     <div className="bg-[#1c1c1c] p-8 rounded-xl mt-6">
-      <form className="flex items-start flex-wrap justify-between ">
+      <form
+        onSubmit={(e) => submitHandler(e)}
+        className="flex items-start flex-wrap justify-between "
+      >
         <div className="w-[45%]">
           <div className="w-full">
             <h3 className="text-lg mb-1 text-gray-300">Task Title</h3>
             <input
               className="border border-gray-400 w-full py-1.5 px-2 text-lg outline-none rounded-sm "
               type="text"
-              placeholder="Make a UI design"
+              name="taskTitle"
+              value={createTaskData.taskTitle}
+              placeholder="Task Title..."
+              onChange={handleChange}
             />
           </div>
           <div>
             <h3 className="text-lg mb-1 mt-2 text-gray-300">Date</h3>
             <input
+              onChange={handleChange}
+              name="date"
+              value={createTaskData.date}
               className="border border-gray-400 w-full py-1.5 px-2  text-lg outline-none rounded-sm "
               type="date"
             />
@@ -25,6 +69,9 @@ const CreateTask = () => {
             <input
               className="border border-gray-400 w-full py-1.5 px-2  text-lg outline-none rounded-sm "
               type="text"
+              name="assignto"
+              value={createTaskData.assignto}
+              onChange={handleChange}
               placeholder="Employee Name"
             />
           </div>
@@ -33,6 +80,9 @@ const CreateTask = () => {
             <input
               className="border border-gray-400 w-full py-1.5 px-2  text-lg outline-none rounded-sm "
               type="text"
+              name="category"
+              value={createTaskData.category}
+              onChange={handleChange}
               placeholder="design, dev, etc"
             />
           </div>
@@ -42,10 +92,11 @@ const CreateTask = () => {
           <h3 className="text-xl mb-2 text-gray-300">Description</h3>
           <textarea
             className="w-full h-47 text-lg py-2 px-4 outline-none bg-transparent border border-gray-400"
-            name=""
-            id=""
             cols="30"
             rows="10"
+            name="description"
+            onChange={handleChange}
+            value={createTaskData.description}
             placeholder="Drop Your Idea..."
           ></textarea>
 
