@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const CreateTask = () => {
+  const [userData, setUserData] = useContext(AuthContext);
+
   const initialState = {
     taskTitle: "",
     assignto: "",
@@ -11,7 +14,7 @@ const CreateTask = () => {
 
   const [createTaskData, setCreateTaskData] = useState(initialState);
 
-  const [task, setTask] = useState({});
+  const [newTask, setNewTask] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,14 +27,25 @@ const CreateTask = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    setTask({
-     ...createTaskData,
+    setNewTask({
+      ...createTaskData,
       active: false,
       newTask: true,
-      failed: true,
+      failed: false,
       completed: false,
     });
-    console.log(task);
+
+    const data = userData;
+
+    data.forEach((elem) => {
+      if (createTaskData.assignto === elem.firstName) {
+        elem.tasks.push(newTask);
+        elem.taskCounts.newTask = elem.taskCounts.newTask + 1;
+      }
+    });
+    setUserData(data);
+
+    // console.log(data);
 
     setCreateTaskData(initialState);
   };
@@ -46,7 +60,7 @@ const CreateTask = () => {
           <div className="w-full">
             <h3 className="text-lg mb-1 text-gray-300">Task Title</h3>
             <input
-              className="border border-gray-400 w-full py-1.5 px-2 text-lg outline-none rounded-sm "
+              className="border border-gray-400 w-full py-1.5 px-2 text-lg outline-none rounded-sm"
               type="text"
               name="taskTitle"
               value={createTaskData.taskTitle}
