@@ -36,6 +36,31 @@ The project uses LocalStorage to persist data without a backend.
 - React (if used)
 - LocalStorage API
 
+
+
 ---
 
+## 📊 How It Works
+
+- Admin creates tasks.
+- Tasks are assigned to employees.
+- Task data updates in application state.
+- Data is stored in LocalStorage.
+- Employees can view updated tasks instantly.
+
+---
+
+## 🔮 Future Improvements
+
+- Backend integration (Node.js + MongoDB)
+- Authentication system
+- Role-based login
+- Task deadline reminders
+
+---
+
+## 👨‍💻 Author
+
+Sachin Kushwaha  
+B.Tech Student | Frontend Developer
 
