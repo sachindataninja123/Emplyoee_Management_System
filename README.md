@@ -33,7 +33,7 @@ The project uses LocalStorage to persist data without a backend.
 - HTML
 - CSS
 - JavaScript
-- React (if used)
+- React 
 - LocalStorage API
 
 
